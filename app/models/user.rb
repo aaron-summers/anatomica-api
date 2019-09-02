@@ -1,6 +1,8 @@
 class User < ApplicationRecord
     has_secure_password
     validates :username, uniqueness: { case_sensitive: false }
+    has_many :quizzes
+    has_many :categories, through: :quizzes
 
     def token
         JWT.encode({ user_id: self.id }, ENV['RAILS_SECRET'])
