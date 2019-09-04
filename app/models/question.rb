@@ -1,5 +1,4 @@
 class Question < ApplicationRecord
   belongs_to :category
-  has_one :option
-  has_and_belongs_to_many :quizzes
+  # has_one :option, dependent: :destroy
 end

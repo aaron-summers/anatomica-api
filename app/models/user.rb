@@ -1,7 +1,7 @@
 class User < ApplicationRecord
     has_secure_password
     validates :username, uniqueness: { case_sensitive: false }
-    has_many :quizzes
+    has_many :quizzes, dependent: :destroy
     has_many :categories, through: :quizzes
 
     def token

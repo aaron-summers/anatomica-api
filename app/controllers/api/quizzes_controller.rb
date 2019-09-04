@@ -8,6 +8,13 @@ class Api::QuizzesController < ApplicationController
         quiz = Quiz.new(quiz_params)
         quiz.serial = SecureRandom.hex(16).to_s
         quiz.user_id = @current_user.id
+        questionObj = Array.new
+        questions = Array.new
+        quiz.category.questions.each do |obj|
+            questionObj.push(obj.attributes.except("created_at", "updated_at", "category_id"))
+        end
+        questions = questionObj.sample(3)
+        quiz.questions = questions
         quiz.save
 
         if quiz.valid? 
@@ -17,9 +24,14 @@ class Api::QuizzesController < ApplicationController
         end
     end
 
+    def show
+        quiz = Quiz.find(params[:id])
+        render json: { quiz: QuizSerializer.new(quiz)}, status: :ok
+    end
+
     private 
 
     def quiz_params
-        params.require(:quiz).permit(:serial, :user_id, :category_id)
+        params.require(:quiz).permit(:serial, :user_id, :category_id, :questions)
     end      
 end

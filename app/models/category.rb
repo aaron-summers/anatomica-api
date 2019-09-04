@@ -1,4 +1,4 @@
 class Category < ApplicationRecord
-    has_many :questions
-    has_many :quizzes
+    has_many :questions, dependent: :destroy
+    has_many :quizzes, dependent: :destroy
 end
