@@ -87,3 +87,4 @@ production:
   database: anatomica_production
   username: anatomica
   password: <%= ENV['ANATOMICA_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
