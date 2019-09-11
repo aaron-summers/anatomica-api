@@ -13,7 +13,7 @@ class Api::QuizzesController < ApplicationController
         quiz.category.questions.each do |obj|
             questionObj.push(obj.attributes.except("created_at", "updated_at", "category_id"))
         end
-        questions = questionObj.sample(3)
+        questions = questionObj.sample(5)
         quiz.questions = questions
         quiz.save
 
